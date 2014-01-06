@@ -71,6 +71,13 @@
                 android:summary="@string/qs_configurable_summary"
                 android:persistent="false"/>
 
+        <CheckBoxPreference
+                android:key="double_tap_to_sleep"
+                android:title="@string/double_tap_to_sleep_title"
+                android:summary="@string/double_tap_to_sleep_summary"
+                android:persistent="false"
+                android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <!-- Navigation bar -->

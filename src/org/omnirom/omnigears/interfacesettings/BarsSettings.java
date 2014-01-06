@@ -57,6 +57,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private static final int DEVICE_PHONE  = 0;
     private static final int DEVICE_HYBRID = 1;
     private static final int DEVICE_TABLET = 2;
+    private static final String DOUBLE_TAP_TO_SLEEP = "double_tap_to_sleep";
 
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarNotifCount;
@@ -66,6 +67,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private ListPreference mQuickPulldown;
     private ListPreference mSmartPulldown;
     private CheckBoxPreference mSoftBackKillApp;
+    private CheckBoxPreference mDTS;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,11 @@ public class BarsSettings extends SettingsPreferenceFragment implements
             Settings.System.QUICK_SETTINGS_TILES_ROW, 1) != 0);
         mQuickSettingsDynamic.setOnPreferenceChangeListener(this);
 
+        mDTS = (CheckBoxPreference) findPreference(DOUBLE_TAP_TO_SLEEP);
+        mDTS.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.DOUBLE_TAP_TO_SLEEP, 0) == 1);
+        mDTS.setOnPreferenceChangeListener(this);
+
         boolean hasNavBar = getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
         // Also check, if users without navigation bar force enabled it.
@@ -193,7 +200,15 @@ public class BarsSettings extends SettingsPreferenceFragment implements
         } else if (preference == mSoftBackKillApp) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver,
+<<<<<<< HEAD
                 Settings.System.SOFT_BACK_KILL_APP_ENABLE, value ? 1 : 0);
+=======
+                Settings.System.QS_QUICK_PULLDOWN, statusQuickPulldown);
+        } else if (preference == mDTS) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(resolver,
+                    Settings.System.DOUBLE_TAP_TO_SLEEP, value ? 1 : 0);
+>>>>>>> ed4d9c4... [2/2] OmniGears: Double tap to sleep
         } else {
             return false;
         }
